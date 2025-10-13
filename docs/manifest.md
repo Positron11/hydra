@@ -110,9 +110,9 @@ There is no open, end-to-end toolchain that:
 
 4. **Open suite** (benchmarks + solver + sims) reproducible and extensible.
 
-# Plan of Action (Fast-Track)
+## Plan of Action (Fast-Track)
 
-## Week 1 — Foundations & Spec
+### Week 1 — Foundations & Spec
 
 - Lock target grid geometries and periphery I/O models; define contamination & valve-timing rules.  
 
@@ -121,33 +121,33 @@ There is no open, end-to-end toolchain that:
 - Build assay-graph schema + loader; create 3–5 seed assays (PCR, ELISA).  
 **Artifacts:** `specs/constraints.md`, `pils/solver_v0.py`, `benchmarks/assays/`
 
-## Week 2 — Mapping v0 (Feasibility First)
+### Week 2 — Mapping v0 (Feasibility First)
 
 - ILP “skeleton” (placement+routing minimal) with big-M contamination constraints; greedy list-scheduler for timing.  
 
 - Boundary-order module: derive terminal circular order, detect chord crossings → early **impossibility flag**.  
 **Artifacts:** `synthesis/ags_ilp_v0.py`, `synthesis/boundary_test.py`
 
-## Week 3 — Physics-Aware Pruning
+### Week 3 — Physics-Aware Pruning
 
 - Integrate PILS into ILP/heuristic loop: reject mappings that violate ΔP/Q or dispersion thresholds.  
 
 - Add valve latency & control-sharing feasibility check.  
 **Artifacts:** `synthesis/pils_hook/`, `reports/run_{assay}_{arch}.md`
 
-## Week 4 — Heuristics & DCSA
+### Week 4 — Heuristics & DCSA
 
 - Negotiation-based routing with rip-up-and-reroute; simple distributed-storage awareness; wash optimization pass.  
 **Artifacts:** `synthesis/heuristics/`, `experiments/ablation_wash/`
 
-## Week 5 — Impossibility & Minimal Vias
+### Week 5 — Impossibility & Minimal Vias
 
 - Implement cut-set capacity tests and degree-expansion checks; formulate **minimal-via** ILP (fewest vias s.t. feasible).  
 
 - Show previously impossible cases become feasible with $k$ vias; quantify benefit vs added complexity.  
 **Artifacts:** `proofs/certificates/`, `synthesis/min_via_ilp.py`
 
-## Week 6 — Control Synthesis & Packaging
+### Week 6 — Control Synthesis & Packaging
 
 - Generate control-layer signals/pin sharing from routes; compare to recent control-synthesis flows.  
 
