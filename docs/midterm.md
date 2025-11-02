@@ -41,7 +41,7 @@ My primary goals are to:
 
 ### 3.1. Informal overview & design goals
 
-The device comprises a **closed-loop microfluidic bus** (a ring) to which multiple **registers** (functional modules) are attached via **valved junctions**. The bus transports fluid “slugs” between registers; registers perform operations (storage, mixing, incubation, sensing, reagent dispense, waste). The design goals are:
+The device comprises a **closed-loop microfluidic bus** (a ring) to which multiple registers (functional modules) are attached via valved junctions. The bus transports fluid "slugs" between registers; registers perform operations (storage, mixing, incubation, sensing, reagent dispense, waste). The design goals are:
 
 - **Minimality:** a single programmable transport backbone with attachable modules.
 - **Extensibility:** new registers can be added without changing bus semantics.
@@ -52,7 +52,7 @@ The device comprises a **closed-loop microfluidic bus** (a ring) to which multip
 
 ### 3.2. Components (structural)
 
-- **Bus:** a closed loop of channels partitioned into **segments** by **valves** and **T-junctions** to registers. Optionally multi-lane; default is one lane with a programmable high-precision **peristaltic pump** (3-valve loop or on-chip pressure drive).
+- **Bus:** a closed loop of channels partitioned into segments by valves and T-junctions to registers. Optionally multi-lane; default is one lane with a programmable high-precision peristaltic pump (3-valve loop or on-chip pressure drive).
 
 - **Registers:** a finite set $\{R_i\}$, each with:
   
@@ -68,11 +68,11 @@ The device comprises a **closed-loop microfluidic bus** (a ring) to which multip
 
 - **Valves:** binary actuators with open/close latency $(t_{\text{open}}, t_{\text{close}})$, minimum pulse width $t_{\min}$, maximum safe actuation rate $f_{\max}$.
 
-- **Pumps/Drive:** provides commanded volumetric displacement $\Delta V_{\text{bus}}$ per **timeslot** $\Delta t$, or equivalently a nominal flow $Q_{\text{bus}}$. Clock-cycle approximation.
+- **Pumps/Drive:** provides commanded volumetric displacement $\Delta V_{\text{bus}}$ per timeslot $\Delta t$, or equivalently a nominal flow $Q_{\text{bus}}$. Clock-cycle approximation.
 
 - **Sensors/Actuators on registers:** temperature controllers, magnets, optical paths, electrodes, etc., each with activation constraints and warm-up times.
 
-- **Global utilities:** at least one **Wash** register and one **Waste** register are assumed.
+- **Global utilities:** at least one Wash register and one Waste register are assumed.
 
 ### 3.3. Why Bus-and-Register over Valve-Array Grids
 
@@ -88,8 +88,8 @@ Grids still enable extreme parallel point-to-point traffic; when needed, we can 
 The Assay IR (AIR) is a **typed, dependency and resource-aware action graph** that:
 
 - Expresses **what** to do (domain ops like MIX, INCUBATE, SENSE) without committing to **where/when** (left to mapping/scheduling);
-- Carries **minimal physical facts** (volumes, classes, temperatures, time windows) sufficient to derive a correct schedule on the bus-and-register device;
-- Supports **parallelism** and **barriers**, and encodes **hazard/compatibility** information for contamination control.
+- Carries minimal physical facts (volumes, classes, temperatures, time windows) sufficient to derive a correct schedule on the bus-and-register device;
+- Supports parallelism and barriers, and encodes hazard/compatibility information for contamination control.
 
 > **Separation of concerns:** AIR names logical **containers**; the compiler later **binds** containers to concrete *registers* and emits device macro-ops (eg. `ATTACH`, `DETACH`, `SHIFT`, `FLUSH`).
 
@@ -112,14 +112,13 @@ AIR is a **directed acyclic hypergraph**.
 
 Map logical containers to physical registers and route **fluid tokens** on the bus, such that:
 
-- All AIR **data/ timing** constraints hold (deadlines, min/max durations).
-- **Resource** constraints hold (single-server registers/valves, bus exclusivity).
-- **Hygiene** constraints hold (compatibility classes, required flush volumes).
-- **Spacing** on the bus ≥ δ_min; no overtaking on a single-lane ring.
+- All AIR data/ timing constraints hold (deadlines, min/max durations).
+- Resource constraints hold (single-server registers/valves, bus exclusivity).
+- Hygiene constraints hold (compatibility classes, required flush volumes).
 
 ### 5.2. Objectives
 
-1. Feasible schedule
+1. **Feasible schedule**
 2. Minimize flush volume
 3. Minimize valve actuations
 
@@ -147,24 +146,24 @@ As a system building block, a single ring can drive complete small assays; multi
 
 ## 9. References
 
-1. G.M. Whitesides, “The origins and the future of microfluidics,” *Nature* **442** (2006): 368–373.  
+1. G.M. Whitesides, "The origins and the future of microfluidics," *Nature* **442** (2006): 368–373.  
 
-2. M.A. Unger *et al.*, “Monolithic microfabricated valves and pumps by multilayer soft lithography,” *Science* **288** (2000): 113–116.  
+2. M.A. Unger *et al.*, "Monolithic microfabricated valves and pumps by multilayer soft lithography," *Science* **288** (2000): 113–116.  
 
-3. T. Thorsen, S.J. Maerkl, S.R. Quake, “Microfluidic large-scale integration,” *Science* **298** (2002): 580–584.  
+3. T. Thorsen, S.J. Maerkl, S.R. Quake, "Microfluidic large-scale integration," *Science* **298** (2002): 580–584.  
 
-4. K. Choi, A.H.C. Ng, R. Fobel, A.R. Wheeler, “Digital Microfluidics,” *Annu. Rev. Anal. Chem.* **5** (2012): 413–440.  
+4. K. Choi, A.H.C. Ng, R. Fobel, A.R. Wheeler, "Digital Microfluidics," *Annu. Rev. Anal. Chem.* **5** (2012): 413–440.  
 
-5. M. Prakash, N. Gershenfeld, “Microfluidic Bubble Logic,” *Science* **315** (2007): 832–835.  
+5. M. Prakash, N. Gershenfeld, "Microfluidic Bubble Logic," *Science* **315** (2007): 832–835.  
 
-6. D. Huh *et al.*, “Reconstituting organ-level lung functions on a chip,” *Science* **328** (2010): 1662–1668.  
+6. D. Huh *et al.*, "Reconstituting organ-level lung functions on a chip," *Science* **328** (2010): 1662–1668.  
 
-7. J. Melin, S.R. Quake, “Microfluidic large-scale integration: The evolution of design rules for biological automation,” *Annu. Rev. Biophys.* **36** (2007): 213–231.  
+7. J. Melin, S.R. Quake, "Microfluidic large-scale integration: The evolution of design rules for biological automation," *Annu. Rev. Biophys.* **36** (2007): 213–231.  
 
-8. E.E. Tsur, “Computer-Aided Design of Microfluidic Circuits,” *Annu. Rev. Biomed. Eng.* **22** (2020): 285–307.  
+8. E.E. Tsur, "Computer-Aided Design of Microfluidic Circuits," *Annu. Rev. Biomed. Eng.* **22** (2020): 285–307.  
 
-9. X. Huang *et al.*, “Computer-aided design techniques for flow-based microfluidic lab-on-a-chip systems,” *ACM Comput. Surv.* **54** (2022): 1–29.  
+9. X. Huang *et al.*, "Computer-aided design techniques for flow-based microfluidic lab-on-a-chip systems," *ACM Comput. Surv.* **54** (2022): 1–29.  
 
-10. G. Liu *et al.*, “Design automation for continuous-flow microfluidic biochips: A comprehensive review,” *Integration* **82** (2022): 48–66.  
+10. G. Liu *et al.*, "Design automation for continuous-flow microfluidic biochips: A comprehensive review," *Integration* **82** (2022): 48–66.  
 
-11. I.E. Araci, S.R. Quake, “Recent developments in microfluidic large scale integration,” *Curr. Opin. Biotechnol.* **25** (2014): 60–68.
+11. I.E. Araci, S.R. Quake, "Recent developments in microfluidic large scale integration," *Curr. Opin. Biotechnol.* **25** (2014): 60–68.

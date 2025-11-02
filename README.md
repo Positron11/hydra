@@ -1,3 +1,3 @@
-# Physics-Aware Synthesis and Impossibility Conditions for Mapping Assay Graphs onto Valve-Grid Lab-on-Chips with Periphery I/O
+# Compiler for Bus-and-Register Microfluidic Assays
 
-This project develops an end-to-end toolchain for mapping assay sequencing graphs onto valve-grid microfluidic lab-on-chips that constrain inlets/outlets to the chip periphery. The framework unifies synthesis, physics-aware simulation, and formal impossibility certificates so researchers can both realize feasible mappings and understand when single-layer grids fundamentally cannot host a given assay without vertical vias.
+This project introduces an extensible bus-and-register microfluidic architecture and delivers an end-to-end compiler that maps structured assay specifications to executable valve schedules on the platform. The tooling pairs automated schedule synthesis with a lightweight physics-in-the-loop verifier so researchers can validate feasibility while characterizing the architecture's scope.
